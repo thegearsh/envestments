@@ -40,7 +40,7 @@ public class WithdrawalService  {
             throw new IllegalArgumentException("Withdrawal amount exceeds 90% of product balance");
         }
 
-        // Perform withdrawal logic and update database
+        //update database
         investor.setBalance(newBalance);
         investorRepository.save(investor)
         // the withdrawal process
