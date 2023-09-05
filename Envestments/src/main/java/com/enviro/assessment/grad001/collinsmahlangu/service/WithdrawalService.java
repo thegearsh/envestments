@@ -1,5 +1,3 @@
-
-
 /**
  *
  * @author thegearsh
@@ -43,6 +41,9 @@ public class WithdrawalService  {
         }
 
         // Perform withdrawal logic and update database
-        // You can implement the withdrawal process here
+        investor.setBalance(newBalance);
+        investorRepository.save(investor)
+        // the withdrawal process
+              double newBalance = investor.getBalance() - withdrawalAmount;
     }
 }
