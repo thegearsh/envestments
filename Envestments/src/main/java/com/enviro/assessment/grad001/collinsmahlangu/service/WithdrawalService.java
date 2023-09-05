@@ -13,18 +13,18 @@ import org.springframework.stereotype.Service;
 
 @Service 
 public class WithdrawalService  {
-    private final InvestorRepo investorRepository;
-    private final ProductRepo productRepository;
+    private final InvestorRepo investorRepo;
+    private final ProductRepo productRepo;
 
     @Autowired
-    public WithdrawalService(InvestorRepo investorRepository, ProductRepo productRepository) {
-        this.investorRepository = investorRepository;
-        this.productRepository = productRepository;
+    public WithdrawalService(InvestorRepo investorRepo, ProductRepo productRepo) {
+        this.investorRepo = investorRepo;
+        this.productRepo = productRepo;
     }
 
     public void createWithdrawalNotice(Long investorId, Long productId, double withdrawalAmount) {
         // Retrieve the investor and product
-        Investor investor = investorRepository.findById(investorId).orElseThrow(() -> new IllegalArgumentException("Investor not found"));
+        Investor investor = investorRepo.findById(investorId).orElseThrow(() -> new IllegalArgumentException("Investor not found"));
         Product product = productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException("Product not found"));
 
         // Validate withdrawal conditions
@@ -42,8 +42,8 @@ public class WithdrawalService  {
 
         //update database
         investor.setBalance(newBalance);
-        investorRepository.save(investor)
-        // the withdrawal process
-              double newBalance = investor.getBalance() - withdrawalAmount;
+        investorRepository.save(investor);
+        
+        double newBalance = investor.getBalance() - withdrawalAmount;
     }
 }
